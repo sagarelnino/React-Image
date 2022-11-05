@@ -1,22 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import EasyCrop from "./components/EasyCrop";
 import './App.css';
 
 function App() {
+  const [image, setImage] = useState(null);
+
+  const handleImageUpload = async (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <label className="_coverImage-holder">
+          Upload Image
+          <input
+            type="file"
+            name="cover"
+            onChange={handleImageUpload}
+            accept="img/*"
+            style={{ display: "none" }}
+          />
+        </label>
+        <EasyCrop image={image}  />
       </header>
     </div>
   );
